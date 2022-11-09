@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class EasyAlgos
@@ -46,5 +48,33 @@ public class EasyAlgos
         }
 
         return newList;
+    }
+
+    public static String tournamentWinner(ArrayList<ArrayList<String>> competitions, ArrayList<Integer> results)
+    {
+        if (competitions == null || results == null || competitions.size() != results.size())
+        {
+            return "";
+        }
+
+        HashMap<String, Integer> numberOfWins = new HashMap<>();
+        String winningTeam = "";
+        int highestScore = 0;
+
+        for (int i = 0; i < competitions.size(); i++)
+        {
+            String team = competitions.get(i).get(results.get(i) == 1 ? 0 : 1);
+            int newScore = numberOfWins.getOrDefault(team, 0) + 3;
+
+            if (newScore > highestScore)
+            {
+                highestScore = newScore;
+                winningTeam = team;
+            }
+
+            numberOfWins.put(team, newScore);
+        }
+
+        return winningTeam;
     }
 }
