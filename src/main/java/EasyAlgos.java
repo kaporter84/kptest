@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,11 +24,12 @@ public class EasyAlgos
         return sequencePointer == sequence.size();
     }
 
-    public static int[] sortedSquaredArray(int[] array) {
+    public static int[] sortedSquaredArray(int[] array)
+    {
 
-        if(array == null || array.length == 0)
+        if (array == null || array.length == 0)
         {
-            return new int[] {};
+            return new int[]{};
         }
 
         int[] newList = new int[array.length];
@@ -35,7 +37,7 @@ public class EasyAlgos
         int largestPointer = array.length - 1;
         for (int i = array.length - 1; i >= 0; i--)
         {
-            if(Math.abs(array[smallestPointer]) < Math.abs(array[largestPointer]))
+            if (Math.abs(array[smallestPointer]) < Math.abs(array[largestPointer]))
             {
                 newList[i] = Math.abs(array[largestPointer]) * Math.abs(array[largestPointer]);
                 largestPointer--;
@@ -76,5 +78,21 @@ public class EasyAlgos
         }
 
         return winningTeam;
+    }
+
+    public static int nonConstructibleChange(int[] coins)
+    {
+        if (coins.length == 0) return 1;
+
+        Arrays.sort(coins);
+        int createUpTo = 0;
+
+        for (int integer : coins)
+        {
+            if (integer > (createUpTo + 1)) break;
+            createUpTo += integer;
+        }
+
+        return createUpTo + 1;
     }
 }
