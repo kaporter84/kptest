@@ -1,3 +1,5 @@
+import commons.BST;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -94,5 +96,64 @@ public class EasyAlgos
         }
 
         return createUpTo + 1;
+    }
+
+    public static int findClosestValueInBst(BST tree, int target)
+    {
+        BST bestNode = null;
+        if(tree != null) bestNode = iterativeSearch(tree, target, tree);
+        return bestNode != null ? bestNode.value : -1;
+    }
+
+    private static BST iterativeSearch(BST tree, int target, BST bestNode)
+    {
+        BST currentNode = tree;
+        while(currentNode != null)
+        {
+            if (Math.abs(target - bestNode.value) > Math.abs(target - currentNode.value)) bestNode = currentNode;
+
+            if(target < currentNode.value)
+                currentNode = currentNode.left;
+            else if(target > currentNode.value)
+                currentNode = currentNode.right;
+            else
+                break;
+        }
+
+        return bestNode;
+    }
+
+    private static BST search(BST tree, int target, BST bestNode)
+    {
+        if (tree != null && ((tree.left != null && tree.value > tree.left.value) || (tree.right != null && tree.value < tree.right.value) || (tree.left == null && tree.right == null)))
+        {
+            boolean keepGoing = true;
+            if(bestNode == null)
+            {
+               bestNode = tree;
+            }
+            else
+            {
+                int bestNodeCalc = Math.abs(target - bestNode.value);
+                int currentNodeCalc = Math.abs(target - tree.value);
+
+                if (currentNodeCalc == 0 || currentNodeCalc < bestNodeCalc)
+                {
+                    bestNode = tree;
+                }
+
+                keepGoing = currentNodeCalc != 0;
+            }
+
+            if(keepGoing)
+            {
+                if(target < tree.value)
+                    bestNode = search(tree.left, target, bestNode);
+                else if(target > tree.value)
+                    bestNode = search(tree.right, target, bestNode);
+            }
+        }
+
+        return bestNode;
     }
 }
