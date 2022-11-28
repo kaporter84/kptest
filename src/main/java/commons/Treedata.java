@@ -13,7 +13,6 @@ public class Treedata
     @Expose
     private Tree tree;
     @SerializedName("target")
-    @Expose
     private Integer target;
 
     public Tree getTree()

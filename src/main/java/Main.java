@@ -1,56 +1,37 @@
 import com.google.gson.Gson;
-import commons.BST;
-import commons.Node;
+import commons.BinaryTree;
+import commons.Tree;
 import commons.Treedata;
+import customutils.BinaryTreeUtil;
 
-import java.util.List;
-
-import static customutils.BinaryTreeUtil.listToBst;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Main
 {
     public static void main(String[] args)
     {
-
-        String json = "{\n" +
+        String s = "{\n" +
                 "  \"tree\": {\n" +
                 "    \"nodes\": [\n" +
-                "      {\"id\": \"100\", \"left\": \"5\", \"right\": \"502\", \"value\": 100},\n" +
-                "      {\"id\": \"502\", \"left\": \"204\", \"right\": \"55000\", \"value\": 502},\n" +
-                "      {\"id\": \"55000\", \"left\": \"1001\", \"right\": null, \"value\": 55000},\n" +
-                "      {\"id\": \"1001\", \"left\": null, \"right\": \"4500\", \"value\": 1001},\n" +
-                "      {\"id\": \"4500\", \"left\": null, \"right\": null, \"value\": 4500},\n" +
-                "      {\"id\": \"204\", \"left\": \"203\", \"right\": \"205\", \"value\": 204},\n" +
-                "      {\"id\": \"205\", \"left\": null, \"right\": \"207\", \"value\": 205},\n" +
-                "      {\"id\": \"207\", \"left\": \"206\", \"right\": \"208\", \"value\": 207},\n" +
-                "      {\"id\": \"208\", \"left\": null, \"right\": null, \"value\": 208},\n" +
-                "      {\"id\": \"206\", \"left\": null, \"right\": null, \"value\": 206},\n" +
-                "      {\"id\": \"203\", \"left\": null, \"right\": null, \"value\": 203},\n" +
-                "      {\"id\": \"5\", \"left\": \"2\", \"right\": \"15\", \"value\": 5},\n" +
-                "      {\"id\": \"15\", \"left\": \"5-2\", \"right\": \"22\", \"value\": 15},\n" +
-                "      {\"id\": \"22\", \"left\": null, \"right\": \"57\", \"value\": 22},\n" +
-                "      {\"id\": \"57\", \"left\": null, \"right\": \"60\", \"value\": 57},\n" +
-                "      {\"id\": \"60\", \"left\": null, \"right\": null, \"value\": 60},\n" +
-                "      {\"id\": \"5-2\", \"left\": null, \"right\": null, \"value\": 5},\n" +
-                "      {\"id\": \"2\", \"left\": \"1\", \"right\": \"3\", \"value\": 2},\n" +
-                "      {\"id\": \"3\", \"left\": null, \"right\": null, \"value\": 3},\n" +
-                "      {\"id\": \"1\", \"left\": \"-51\", \"right\": \"1-2\", \"value\": 1},\n" +
-                "      {\"id\": \"1-2\", \"left\": null, \"right\": \"1-3\", \"value\": 1},\n" +
-                "      {\"id\": \"1-3\", \"left\": null, \"right\": \"1-4\", \"value\": 1},\n" +
-                "      {\"id\": \"1-4\", \"left\": null, \"right\": \"1-5\", \"value\": 1},\n" +
-                "      {\"id\": \"1-5\", \"left\": null, \"right\": null, \"value\": 1},\n" +
-                "      {\"id\": \"-51\", \"left\": \"-403\", \"right\": null, \"value\": -51},\n" +
-                "      {\"id\": \"-403\", \"left\": null, \"right\": null, \"value\": -403}\n" +
+                "      {\"id\": \"1\", \"left\": \"2\", \"right\": \"3\", \"value\": 1},\n" +
+                "      {\"id\": \"2\", \"left\": \"4\", \"right\": \"5\", \"value\": 2},\n" +
+                "      {\"id\": \"3\", \"left\": \"6\", \"right\": \"7\", \"value\": 3},\n" +
+                "      {\"id\": \"4\", \"left\": \"8\", \"right\": \"9\", \"value\": 4},\n" +
+                "      {\"id\": \"5\", \"left\": \"10\", \"right\": null, \"value\": 5},\n" +
+                "      {\"id\": \"6\", \"left\": null, \"right\": null, \"value\": 6},\n" +
+                "      {\"id\": \"7\", \"left\": null, \"right\": null, \"value\": 7},\n" +
+                "      {\"id\": \"8\", \"left\": null, \"right\": null, \"value\": 8},\n" +
+                "      {\"id\": \"9\", \"left\": null, \"right\": null, \"value\": 9},\n" +
+                "      {\"id\": \"10\", \"left\": null, \"right\": null, \"value\": 10}\n" +
                 "    ],\n" +
-                "    \"root\": \"100\"\n" +
-                "  },\n" +
-                "  \"target\": 208\n" +
+                "    \"root\": \"1\"\n" +
+                "  }" +
                 "}";
-
-        Treedata treedata = new Gson().fromJson(json, Treedata.class);
-        List<Node> nodeList = treedata.getTree().getNodes();
-        BST bst = listToBst(nodeList, treedata.getTree().getRoot());
-       System.out.println(EasyAlgos.findClosestValueInBst(bst, treedata.getTarget()));
+        Treedata tree = new Gson().fromJson(s, Treedata.class);
+        BinaryTree binaryTree = BinaryTreeUtil.listToBinaryTree(tree.getTree().getNodes(), tree.getTree().getRoot());
+        System.out.println(EasyAlgos.branchSums(binaryTree));
     }
 }
 

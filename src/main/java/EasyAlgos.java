@@ -1,4 +1,5 @@
 import commons.BST;
+import commons.BinaryTree;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -155,5 +156,39 @@ public class EasyAlgos
         }
 
         return bestNode;
+    }
+
+    private static List<Integer> search(BinaryTree tree, List<Integer> integers, int sum)
+    {
+        if (tree == null)
+        {
+            return integers;
+        }
+
+        sum += tree.value;
+        if(tree.left == null && tree.right == null)
+        {
+            integers.add(sum);
+        }
+        else if (tree.left != null && tree.right != null)
+        {
+            integers = search(tree.left, integers, sum);
+            integers = search(tree.right, integers, sum);
+        }
+        else if(tree.left != null)
+        {
+            integers = search(tree.left, integers, sum);
+        }
+        else
+        {
+            integers = search(tree.right, integers, sum);
+        }
+
+        return integers;
+    }
+
+    public static List<Integer> branchSums(BinaryTree root)
+    {
+        return search(root, new ArrayList<>(), 0);
     }
 }
