@@ -160,12 +160,9 @@ public class EasyAlgos
 
     private static List<Integer> search(BinaryTree tree, List<Integer> integers, int sum)
     {
-        if (tree == null)
-        {
-            return integers;
-        }
-
+        if (tree == null) return integers;
         sum += tree.value;
+
         if(tree.left == null && tree.right == null)
         {
             integers.add(sum);
@@ -190,5 +187,34 @@ public class EasyAlgos
     public static List<Integer> branchSums(BinaryTree root)
     {
         return search(root, new ArrayList<>(), 0);
+    }
+
+    public static int nodeDepths(BinaryTree root) {
+        if(root == null ) return -1;
+        List<Integer> integers = nodeDepthsSub(root, new ArrayList<>(), 0);
+        return integers.stream().mapToInt(value -> value).sum();
+    }
+
+    private static List<Integer> nodeDepthsSub(BinaryTree tree, List<Integer> integers, int depth)
+    {
+        if(tree == null) return integers;
+        if(depth > 0) integers.add(depth);
+        depth += 1;
+
+        if (tree.left != null && tree.right != null)
+        {
+            integers = nodeDepthsSub(tree.left, integers, depth);
+            integers = nodeDepthsSub(tree.right, integers, depth);
+        }
+        else if(tree.left != null)
+        {
+            integers = nodeDepthsSub(tree.left, integers, depth);
+        }
+        else
+        {
+            integers = nodeDepthsSub(tree.right, integers, depth);
+        }
+
+        return integers;
     }
 }
