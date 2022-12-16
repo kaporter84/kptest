@@ -1,8 +1,10 @@
 package customutils;
 
-import commons.BST;
-import commons.BinaryTree;
-import commons.Node;
+import commons.Program;
+import commons.depthfirstsearchstructure.SubNode;
+import commons.treestructure.BST;
+import commons.treestructure.BinaryTree;
+import commons.treestructure.Node;
 
 import java.util.List;
 
@@ -26,5 +28,15 @@ public class BinaryTreeUtil
         if(node.getLeft() != null) bst.left = listToBinaryTree(nodes, node.getLeft().toString());
         if(node.getRight() != null) bst.right = listToBinaryTree(nodes, node.getRight().toString());
         return bst;
+    }
+
+    public static Program listToNode(List<SubNode> subNodes, String index)
+    {
+        if(subNodes == null) return null;
+        SubNode subNode = subNodes.stream().filter(it -> it.getId().equals(index)).findFirst().get();
+        Program program = new Program();
+        program.setNode(subNode.getValue());
+        program.addChildren(subNodes, subNode.getId(), program.getNode());
+        return program;
     }
 }

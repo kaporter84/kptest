@@ -1,4 +1,4 @@
-package commons;
+package commons.treestructure;
 
 import java.util.List;
 import javax.annotation.Generated;

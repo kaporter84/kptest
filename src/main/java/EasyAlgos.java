@@ -1,5 +1,5 @@
-import commons.BST;
-import commons.BinaryTree;
+import commons.treestructure.BST;
+import commons.treestructure.BinaryTree;
 
 import java.util.ArrayList;
 import java.util.Arrays;

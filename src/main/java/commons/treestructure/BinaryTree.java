@@ -1,4 +1,4 @@
-package commons;
+package commons.treestructure;
 
 public class BinaryTree {
     public int value;
