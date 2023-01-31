@@ -1,10 +1,12 @@
 import commons.treestructure.BST;
 import commons.treestructure.BinaryTree;
+import customutils.SortingUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class EasyAlgos
 {
@@ -216,5 +218,16 @@ public class EasyAlgos
         }
 
         return integers;
+    }
+
+    public static int minimumWaitingTime(int[] queries)
+    {
+        if(queries != null)
+        {
+            SortingUtil.quickSort(queries, 0, queries.length - 1);
+            return IntStream.range(0, queries.length).map(t -> queries[t] * (queries.length - (t + 1))).sum();
+        }
+        
+        return -1;
     }
 }
