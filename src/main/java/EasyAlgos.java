@@ -2,10 +2,7 @@ import commons.treestructure.BST;
 import commons.treestructure.BinaryTree;
 import customutils.SortingUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class EasyAlgos
@@ -229,5 +226,12 @@ public class EasyAlgos
         }
         
         return -1;
+    }
+
+    public static boolean classPhotos(ArrayList<Integer> redShirtHeights, ArrayList<Integer> blueShirtHeights)
+    {
+        Collections.sort(redShirtHeights);
+        Collections.sort(blueShirtHeights);
+        return redShirtHeights.get(redShirtHeights.size() - 1) > blueShirtHeights.get(blueShirtHeights.size() - 1) ? IntStream.range(0, redShirtHeights.size()).noneMatch(i -> redShirtHeights.get(i) <= blueShirtHeights.get(i)) : IntStream.range(0, blueShirtHeights.size()).noneMatch(i -> blueShirtHeights.get(i) <= redShirtHeights.get(i));
     }
 }

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -7,8 +9,9 @@ public class Main
     public static void main(String[] args)
     {
 
-        int[] ints = {3,2,1,2,6};
-        int result = EasyAlgos.minimumWaitingTime(ints);
+        ArrayList<Integer> reds = new ArrayList<>(Arrays.asList(5, 8, 1, 3, 4));
+        ArrayList<Integer> blues = new ArrayList<>(Arrays.asList(6,9,2,4,5));
+        boolean result = EasyAlgos.classPhotos(reds, blues);
         System.out.println(result);
 
 //        String s = "{\n" +
