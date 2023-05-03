@@ -234,4 +234,51 @@ public class EasyAlgos
         Collections.sort(blueShirtHeights);
         return redShirtHeights.get(redShirtHeights.size() - 1) > blueShirtHeights.get(blueShirtHeights.size() - 1) ? IntStream.range(0, redShirtHeights.size()).noneMatch(i -> redShirtHeights.get(i) <= blueShirtHeights.get(i)) : IntStream.range(0, blueShirtHeights.size()).noneMatch(i -> blueShirtHeights.get(i) <= redShirtHeights.get(i));
     }
+
+    public static int evaluateExpressionTree(BinaryTree tree) {
+        Stack<Integer> stack = new Stack<>();
+        ArrayList<BinaryTree> inorderTraversal = getInorderTraversal(tree);
+
+        for (BinaryTree node : inorderTraversal) {
+            if (node.left == null && node.right == null) {
+                stack.push(node.value);
+            } else {
+                int right = stack.pop();
+                int left = 0; // default value if stack doesn't have enough nodes
+                if (!stack.empty()) {
+                    left = stack.pop();
+                }
+                int result = 0;
+                switch (node.value) {
+                    case -1:
+                        result = left + right;
+                        break;
+                    case -2:
+                        result = left - right;
+                        break;
+                    case -3:
+                        result = left / right;
+                        break;
+                    case -4:
+                        result = left * right;
+                        break;
+                }
+                stack.push(result);
+            }
+        }
+        return stack.pop();
+    }
+
+    private static ArrayList<BinaryTree> getInorderTraversal(BinaryTree node, ArrayList<BinaryTree> result) {
+        if (node != null) {
+            getInorderTraversal(node.left, result);
+            result.add(node);
+            getInorderTraversal(node.right, result);
+        }
+        return result;
+    }
+
+    private static ArrayList<BinaryTree> getInorderTraversal(BinaryTree node) {
+        return getInorderTraversal(node, new ArrayList<>());
+    }
 }
